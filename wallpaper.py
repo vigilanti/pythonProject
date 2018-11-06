@@ -1,10 +1,11 @@
+#This program demonstrate how to change wallpaper in Linux distrubition within 10 second
+
 import os
 from array import *
 import time
 from random import randint
 
-#a = array('i',os.listdir("/home/vigilante/Pictures")
-mylist = os.listdir("/home/vigilante/Pictures")
+mylist = os.listdir("/home/vigilante/Pictures")#path to directory containing Pictures
 while(True):
     x=randint(0,len(mylist));
     os.system("gsettings set org.gnome.desktop.background picture-uri file:///home/vigilante/Pictures/"+str(mylist[x]))
